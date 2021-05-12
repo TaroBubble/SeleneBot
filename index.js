@@ -1,28 +1,58 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const client = new Discord.Client();
 require('dotenv').config();
 
 const prefix = process.env.PREFIX;
 const utopia = new Discord.Client();
 utopia.commands = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) console.error(err);
+const commandFolders = fs.readdirSync('./commands');
 
-  let commandFiles = files.filter(f => f.split('.').pop() === 'js');
-})
+for (const folder of commandFolders) {
+	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+    console.log(command);
+		utopia.commands.set(command.name, command);
+	}
+}
 
-client.once('ready', () => {
+utopia.once('ready', () => {
   console.log('Ready');
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as ${utopia.user.tag}!`);
 });
 
 
-client.on('message', message => {
-  if (message.content === '!ping') {
-    message.channel.send('Pong');
+utopia.on('message', message => {
+  if (!message.content.startsWith(prefix) || message.author.bot) {
+    return;
   }
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/g);
+  const commandName = args.shift().toLowerCase();
+
+  if (!message.guild) {
+    return;
+  }
+  
+  if (!utopia.commands.has(commandName)) {
+    message.channel.send("No Commands Found. Type !help for a list of commands");
+    return;
+  }
+
+  const command = utopia.commands.get(commandName);
+
+  if (command.args && !args.length) {
+    return message.channel.send(`Didn't provide any arguments, ${message.author}!`);
+  }
+
+  try {
+    command.execute(message, args);
+  } catch (error) {
+    console.log(error);
+    message.reply('Error when executing command!');
+  }
+
 });
 
-client.login(process.env.TOKEN);
+utopia.login(process.env.TOKEN);
