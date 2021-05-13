@@ -1,8 +1,45 @@
 module.exports = {
   name: 'help',
   description: 'A list of commands',
+  usage: 'List of commands and how to use them',
   args: false,
   execute(message) {
+    const helpEmbed = {
+      color: '#34ebba',
+      title: 'Command List',
+      description: 'List of commands',
+      field: [
+        {
+          name: 'Moderation Commands', 
+          value: `
+            !kick <user>: Kicks user from server
+            !role <role> <user>: 'Assigns role to user
+          `,
+          inline: true,
+        },
+        {
+          name: 'Util Commands',
+          value: `
+            !help: List of commands
+            !role <role> <user>: Assigns role to user
+          `,
+          inline: true,
+        },
+        {
+          name: 'Fun Commands',
+          value: `
+            !avatar <user>: Shows user Avatar
+            !ping: Shows latency
+            !spoiler: Sends spoiler text
+            !stocks <stockSign>: Gives stock information of stock
+            !urban <phrase>: Gives urban dictionary definition  `,
+          inline: true,
+        },
+      ],
+      timestamp: new Date(),
+    };
+  
+    message.channel.send({embed: helpEmbed}); 
     message.channel.send(` 
     **Mod Commands**
     => 1. !kick <user> => Kicks user from server

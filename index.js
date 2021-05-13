@@ -12,10 +12,11 @@ for (const folder of commandFolders) {
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
-    console.log(command);
 		utopia.commands.set(command.name, command);
 	}
 }
+
+console.log(utopia.commands);
 
 utopia.once('ready', () => {
   console.log('Ready');

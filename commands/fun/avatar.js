@@ -1,10 +1,11 @@
+const Discord = require('discord.js');
 module.exports = {
   name: 'avatar',
   description: 'Show user avatar',
+  usage: 'Shows the user\'s avatar in embeded',
   args: true,
   execute(message, args) {
     const user = message.mentions.users.first();
-    const Discord = require('discord.js');
     if (user) {
       const member = message.guild.member(user);
       if (member) {
