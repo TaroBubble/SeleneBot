@@ -5,8 +5,7 @@ module.exports = {
   args: true,
   execute(message, args) {
     const guild = message.guild;
-    if (message.member.hasPermission('ADMINISTRATOR')) {
-      message.channel.send('You are an admin');
+    if (message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermission('MANAGE_ROLES') || message.member.hasPermission('MANAGE_GUILD')) {
       guild.roles.create({
         data: {
           name: `${args[0]}`,

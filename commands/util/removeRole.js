@@ -1,16 +1,19 @@
 module.exports = {
-  name: 'giverole',
-  description: 'Gives user and role',
+  name: 'removerole',
+  definition: 'removes role from use',
+  usage: '!removerole <user> <role>',
   args: true,
-  usage: '<user> <role>',
   execute(message, args) {
     const user = message.mentions.users.first();
-    const role = message.guild.roles.cache.find(role => role.name == args[1]);
+    const roleToRemove = message.guild.roles.cache.find(role => role.name == args[1]);
     if (message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermission('MANAGE_ROLES') || message.member.hasPermission('MANAGE_GUILD')) {
+      if (!roleToRemove) {
+        return message.channel.send(`${args[1]} role does not exist`);
+      }
       if (user) {
         const member = message.guild.member(user);
         if (member) {
-          member.roles.add(role);
+          member.roles.remove(roleToRemove);
         } else {
           return message.channel.send('User isn\'t in server');
         }
@@ -18,7 +21,7 @@ module.exports = {
         return message.channel.send('You didn\'t specify a user to kick. Type !help for command help');
       }
     } else {
-      return message.channel.send('You do not have permission to give roles');
+      return message.channel.send('You do not have permission to remove roles');
     }
   },
 };
