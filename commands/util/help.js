@@ -3,7 +3,25 @@ module.exports = {
   description: 'A list of commands',
   usage: 'List of commands and how to use them',
   args: false,
-  execute(message) {
+  execute(message, args) {
+    const data = [];
+    const { commands } = message.client;
+
+    if (!args.length) {
+      data.push('List of Commands: ');
+      data.push(commands.map(command => command.name).join('\n'));
+      data.push(`\nYou can type !help <command> for more usage information`);
+
+      return message.reply(data, { split: true })
+        .then(() => {
+          message.reply('Sent list of commands');
+        })
+        .catch(error => {
+          console.log(error);
+          message.channel.send('Error in command');
+        });
+    }
+    /*
     const helpEmbed = {
       color: '#34ebba',
       title: 'Command List',
@@ -51,6 +69,6 @@ module.exports = {
     => 2. !avatar <user> => Get <user>'s avatar
     => 3. !stocks <stockSign> => Get stock info
     => 4. !spoiler <message> => Creates spoiler on message
-    `);
+    `); */
   },
 };
