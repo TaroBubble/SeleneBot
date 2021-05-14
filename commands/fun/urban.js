@@ -19,18 +19,22 @@ module.exports = {
     if (!list) {
       return message.reply(`No results found for word ${query}`);
     }
-
     const [answer] = list;
-    const embedUrban = new Discord.MessageEmbed()
+    try {
+      const embedUrban = new Discord.MessageEmbed()
       .setColor('#5cddbf')
       .setTitle(answer.word)
       .setURL(answer.permalink)
-      .addField(
+      .addFields(
         {name: 'Definition', value: trim(answer.definition, 1024)},
-        {name: 'Example', value: trim(answer.example, 1024)},
-        {name: 'Rating', value: `${answer.thumbs_up} 👍. ${answer.thumbs_down} 👎 `},
+        {name: 'Rating', value: `${answer.thumbs_up} 👍  ${answer.thumbs_down} 👎 `},
       );
     
-      message.reply(embedUrban);
+      message.channel.send(embedUrban);
+    } catch(err) {
+      console.log(err);
+      message.channel.send('Error setting embed');
+    }
+
   }
 }
