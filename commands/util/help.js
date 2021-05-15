@@ -9,7 +9,7 @@ module.exports = {
 
     if (!args.length) {
       data.push('List of Commands: ');
-      data.push(commands.map(command => command.name).join('\n'));
+      data.push(commands.map(command => '!'+command.name+ ' '+command.usage).join('\n'));
       data.push(`\nYou can type !help <command> for more usage information`);
 
       return message.reply(data, { split: true })

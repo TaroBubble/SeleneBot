@@ -9,7 +9,7 @@ module.exports = {
   args: true,
   execute: async(message, args) => {
     if (!args.length) {
-      return message.reply('No word is provided!');
+      return message.reply('No argument provided!');
     }
     
     const query = queryString.stringify({term: args.join(' ')});
