@@ -1,7 +1,7 @@
 module.exports = {
   name: 'unban',
   description: 'unban user',
-  usage: '!unban <userID>: Unbans user',
+  usage: '!unban <userID>',
   args: true,
   execute(message, args) {
     const memberID = args[0];

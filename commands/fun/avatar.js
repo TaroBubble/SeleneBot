@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 module.exports = {
   name: 'avatar',
   description: 'Show user avatar',
-  usage: 'Shows the user\'s avatar in embeded',
+  usage: '!avatar <user>',
   args: true,
   execute(message, args) {
     const user = message.mentions.users.first();

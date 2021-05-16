@@ -2,10 +2,11 @@ const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const queryString = require('querystring');
 const trim = (str, max) => str.length > max ? `${str.slice(0, max - 3)}...` : str;
+
 module.exports = {
   name: 'urban',
   description: 'urban dictionary',
-  usage: 'search word in urban dictionary',
+  usage: '!urban <term>',
   args: true,
   execute: async(message, args) => {
     if (!args.length) {

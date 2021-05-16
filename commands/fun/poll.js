@@ -1,6 +1,6 @@
 module.exports = {
   name: 'poll',
-  usage: 'creates a poll and user can react',
+  usage: '!poll <question>',
   args: true,
   execute: async(message, args) => {
     if (!args.length) {

@@ -1,7 +1,7 @@
 module.exports = {
   name: 'ping',
   description: 'Command to see latency',
-  usage: 'Command to see latency',
+  usage: '!ping',
   args: false,
   execute(message, args) {
     message.channel.send('Calculating Ping').then ((msg) => {

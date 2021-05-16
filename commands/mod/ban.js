@@ -1,7 +1,7 @@
 module.exports = {
   name: 'ban',
   description: 'ban given user from server',
-  usage: 'Ban user given their mention',
+  usage: '!ban <user>',
   args: true,
   execute(message, args) {
     const user = message.mentions.users.first();

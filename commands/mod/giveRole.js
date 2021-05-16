@@ -1,8 +1,8 @@
 module.exports = {
   name: 'giverole',
   description: 'Gives user and role',
+  usage: '!giverole <user> <role>',
   args: true,
-  usage: '<user> <role>',
   execute(message, args) {
     const user = message.mentions.users.first();
     const role = message.guild.roles.cache.find(role => role.name == args[1]);

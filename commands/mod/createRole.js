@@ -1,7 +1,7 @@
 module.exports = {
   name: 'createrole',
   description: 'create a given role with color',
-  usage: '<roleName> <roleColor>',
+  usage: '!createrole <roleName> <roleColor>',
   args: true,
   execute(message, args) {
     const guild = message.guild;

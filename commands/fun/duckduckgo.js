@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const queryString = require('querystring');
 module.exports = {
   name: 'duckduckgo',
-  usage: 'get first image result from duckduckgo',
+  usage: '!duckduckgo <term>',
   args: true,
   execute: async(message, args) => {
     if (!args.length) {
