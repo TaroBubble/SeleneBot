@@ -9,5 +9,8 @@ module.exports = {
     if (!args.length) {
       return message.reply('No argument provided!');
     }
+
+    const query = queryString.stringify({term: args.join(' ')});
+    
   }
 }
