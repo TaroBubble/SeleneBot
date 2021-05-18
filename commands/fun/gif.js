@@ -13,23 +13,27 @@ module.exports = {
     const url = `https://g.tenor.com/v1/search?q=${term}&key=LIVDSRZULELA&limit=5`;
 
     const result = await fetch(url)
-    const response = await result.json();
+      .then(response => response.json());
 
     if (!result) {
       return message.reply(`No results found for word ${term}`);
     }
 
-    let randIndex = Math.floor(Math.random() * result.length);
-    console.log(response);
-    console.log(typeof(response));
-    console.log(response.results.length);
-    console.log(response.results[0]);
-    /*
+    let randIndex = Math.floor(Math.random() * result.results.length);
+    console.log(result.results[randIndex].media[0]);
+    console.log(result.results[randIndex].media[0].tinygif.url);
+    let gifRes = result.results[randIndex].media[0].tinygif.url;
+    
     try {
       const embedGif = new Discord.MessageEmbed()
         .setColor('#5cddbf')
         .setTitle(term)
-        .setURL
-    }*/
+        .setURL(gifRes)
+        .setImage(gifRes);
+      message.channel.send(embedGif);
+    } catch(error) {
+      console.log(error);
+      message.channel.send('Error in gif embed');
+    }
   }
 }

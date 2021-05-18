@@ -5,7 +5,7 @@ module.exports = {
   description: 'A list of commands',
   usage: '!help or !help <command name>',
   args: false,
-  execute(client, message, args) {
+  execute(message, args) {
     const data = [];
     const { commands } = message.client;
     console.log(commands);
@@ -27,9 +27,12 @@ module.exports = {
       const commandObject = commands.get(args[0]);
       data.push(commandObject.name+' '+commandObject.usage);
       const helpEmbed = new Discord.MessageEmbed()
-        .setTitle(commandObject.name)
-        .setThumbnail(message.client.displayAvatarURL())
-        .setDescription(commandObject.usage);
+        .setTitle('Help')
+        .setColor('#5cddbf')
+        .setThumbnail(message.author.displayAvatarURL())
+        .addFields(
+          {name: `!${commandObject.name}`, value: `${commandObject.usage}`, inline: true})
+        .setTimestamp(message.createdTimestamp);
       return message.channel.send(helpEmbed);
     } 
   },
