@@ -1,12 +1,13 @@
+const Discord = require("discord.js");
+
 module.exports = {
   name: 'help',
   description: 'A list of commands',
   usage: '!help or !help <command name>',
   args: false,
-  execute(message, args) {
+  execute(client, message, args) {
     const data = [];
     const { commands } = message.client;
-    const { usage }
     console.log(commands);
 
     if (!args.length) {
@@ -25,14 +26,11 @@ module.exports = {
     } else {
       const commandObject = commands.get(args[0]);
       data.push(commandObject.name+' '+commandObject.usage);
-      return message.reply(data, {split: true})
-        .then(() => {
-          message.reply('Sent Command Info');
-        })
-        .catch(err => {
-          console.log(err);
-          message.channel.send('Error in command');
-        })
+      const helpEmbed = new Discord.MessageEmbed()
+        .setTitle(commandObject.name)
+        .setThumbnail(message.client.displayAvatarURL())
+        .setDescription(commandObject.usage);
+      return message.channel.send(helpEmbed);
     } 
   },
 };
