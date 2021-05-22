@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const search = require('youtube-search');
 require('dotenv').config();
 
 const prefix = process.env.PREFIX;
