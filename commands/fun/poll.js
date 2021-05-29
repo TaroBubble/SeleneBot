@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
   name: 'poll',
-  usage: '!poll <question>',
+  usage: '<question>',
   args: true,
   execute: async(message, args) => {
     if (!args.length) {
@@ -25,7 +25,7 @@ module.exports = {
       const thumbsUp = reactions.get('👍').count;
       const thumbsDown = reactions.get('👎').count;
       return thumbsUp > thumbsDown ? message.channel.send('People are for it!') : message.channel.send('People are against it!');
-    }, 600000);
+    }, 60000);
     
   }
 }

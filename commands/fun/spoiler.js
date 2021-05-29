@@ -1,9 +1,11 @@
 module.exports = {
   name: 'spoiler',
   description: 'spoiler message',
-  usage: '!spoiler <term>',
-  args: false,
-  execute(message) {
-    message.channel.send(`|| you have nothing better to do huh ||`);
+  usage: '<term>',
+  args: true,
+  execute(message, args) {
+    message.delete({ timeout: 1000 });
+    let term = args.join(' ');
+    message.channel.send(`|| ${term} ||`);
   }
 }
