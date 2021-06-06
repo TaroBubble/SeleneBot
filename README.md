@@ -1,5 +1,5 @@
-# UtopiaBot
-## UtopiaBot is written in JavaScript with Discord.js module in Node.js
+# SeleneBot
+## SeleneBot is written in JavaScript with Discord.js module in Node.js
 
 ## Description
 
@@ -15,7 +15,7 @@ A discord bot used for Moderation and Role generation for users, with some fun f
 
 * You can either download the repo or use npm install <repo_url>
 ```
-npm install https://github.com/TaroBubble/UtopiaBot.git
+npm install https://github.com/TaroBubble/Selene.git
 npm install discord.js
 ```
 * You will need a dotevn file or a config.json file for your discord developer token
